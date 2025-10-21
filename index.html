@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Rush - Time Management Kitchen Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="game-wrapper">
+      <section id="menu-screen" class="screen">
+        <div class="screen-content">
+          <h1>Food Rush</h1>
+          <p class="tagline">Serve delicious meals, keep customers smiling, and race the clock!</p>
+          <div class="menu-actions">
+            <button id="play-btn" class="primary">Start Serving</button>
+          </div>
+          <div class="menu-details">
+            <h2>How to Play</h2>
+            <ul>
+              <li>Tap food stations to prepare items for the serving tray.</li>
+              <li>Select a customer to see their order and deliver a perfect match.</li>
+              <li>Serve quickly to earn bigger tips and keep your combo streak alive.</li>
+              <li>Complete objectives to unlock tougher shifts and hungry customers.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="level-screen" class="screen hidden">
+        <div class="screen-content compact">
+          <h2 id="level-title"></h2>
+          <p id="level-description"></p>
+          <div class="level-stats">
+            <p><strong>Goal:</strong> Serve <span id="level-goal"></span> customers</p>
+            <p><strong>Time Limit:</strong> <span id="level-time"></span> seconds</p>
+          </div>
+          <button id="begin-level" class="primary">Start Level</button>
+        </div>
+      </section>
+
+      <section id="game-screen" class="screen hidden">
+        <header class="hud">
+          <div class="hud-group">
+            <span class="label">Level</span>
+            <span id="hud-level">1</span>
+          </div>
+          <div class="hud-group">
+            <span class="label">Score</span>
+            <span id="hud-score">0</span>
+          </div>
+          <div class="hud-group">
+            <span class="label">High Score</span>
+            <span id="hud-high-score">0</span>
+          </div>
+          <div class="hud-group">
+            <span class="label">Combo</span>
+            <span id="hud-combo">x1</span>
+          </div>
+          <div class="hud-group">
+            <span class="label">Customers</span>
+            <span id="hud-customers">0 / 0</span>
+          </div>
+          <div class="hud-group">
+            <span class="label">Lives</span>
+            <span id="hud-lives">3</span>
+          </div>
+          <div class="hud-group">
+            <span class="label">Time</span>
+            <span id="hud-timer">0s</span>
+          </div>
+          <div class="hud-actions">
+            <button id="pause-btn" class="secondary">Pause</button>
+            <button id="restart-btn" class="secondary">Restart</button>
+          </div>
+        </header>
+
+        <main class="game-area">
+          <aside class="panel kitchen" aria-label="Food Stations">
+            <h3>Kitchen</h3>
+            <div id="kitchen-items" class="kitchen-items"></div>
+          </aside>
+
+          <section class="panel customers" aria-label="Customers waiting area">
+            <h3>Customers</h3>
+            <div id="customers-container" class="customers-container"></div>
+          </section>
+
+          <aside class="panel tray" aria-label="Serving tray">
+            <h3>Serving Tray</h3>
+            <div id="tray-items" class="tray-items"></div>
+            <div class="tray-actions">
+              <button id="serve-btn" class="primary" disabled>Serve Selected Customer</button>
+              <button id="clear-tray" class="secondary">Clear Tray</button>
+            </div>
+            <div id="tray-status" class="tray-status">Select food to prepare and add to tray.</div>
+          </aside>
+        </main>
+
+        <div id="message-banner" class="message-banner hidden"></div>
+      </section>
+
+      <section id="level-complete" class="screen hidden">
+        <div class="screen-content compact">
+          <h2>Level Complete!</h2>
+          <p id="level-complete-summary"></p>
+          <div class="summary-stats">
+            <p><strong>Score Earned:</strong> <span id="level-score"></span></p>
+            <p><strong>Combo Peak:</strong> <span id="level-combo"></span></p>
+            <p><strong>Perfect Service Bonus:</strong> <span id="level-perfect"></span></p>
+          </div>
+          <button id="next-level" class="primary">Continue</button>
+        </div>
+      </section>
+
+      <section id="game-over" class="screen hidden">
+        <div class="screen-content compact">
+          <h2>Shift Over!</h2>
+          <p id="game-over-summary"></p>
+          <div class="summary-stats">
+            <p><strong>Final Score:</strong> <span id="final-score"></span></p>
+            <p><strong>Highest Combo:</strong> <span id="final-combo"></span></p>
+            <p><strong>Customers Served:</strong> <span id="final-customers"></span></p>
+          </div>
+          <div class="menu-actions">
+            <button id="play-again" class="primary">Play Again</button>
+            <button id="return-menu" class="secondary">Quit to Menu</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
