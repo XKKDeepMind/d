@@ -218,6 +218,7 @@
         let score = 0;
         let highScore = localStorage.getItem('snakeHighScore') || 0;
         let gameRunning = true;
+        let gameStarted = false;
         let gameSpeed = 100;
 
         // Initialize high score display
@@ -271,11 +272,19 @@
                 Math.PI * 2
             );
             ctx.fill();
+
+            // Draw start message if game hasn't started
+            if (!gameStarted && gameRunning) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Press Arrow Keys or WASD to Start', canvas.width / 2, canvas.height / 2);
+            }
         }
 
         // Update game state
         function update() {
-            if (!gameRunning) return;
+            if (!gameRunning || !gameStarted) return;
 
             // Move snake head
             const head = {x: snake[0].x + direction.x, y: snake[0].y + direction.y};
@@ -335,6 +344,7 @@
             score = 0;
             scoreElement.textContent = score;
             gameRunning = true;
+            gameStarted = false;
             gameSpeed = 100;
             gameOverElement.style.display = 'none';
             generateFood();
@@ -345,6 +355,15 @@
             if (!gameRunning) return;
 
             const key = e.key.toLowerCase();
+            
+            // Start game on first valid input
+            if (!gameStarted) {
+                if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'].includes(key)) {
+                    gameStarted = true;
+                } else {
+                    return;
+                }
+            }
             
             // Prevent snake from going back into itself
             switch(key) {
@@ -385,17 +404,6 @@
         // Initialize game
         generateFood();
         gameLoop();
-
-        // Start game when any key is pressed initially
-        document.addEventListener('keydown', function startGame(e) {
-            if (direction.x === 0 && direction.y === 0) {
-                const key = e.key.toLowerCase();
-                if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'].includes(key)) {
-                    // Remove this listener after first valid input
-                    document.removeEventListener('keydown', startGame);
-                }
-            }
-        });
     </script>
 </body>
 </html>
